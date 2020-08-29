@@ -59,45 +59,47 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control"
-                            v-model="form.name" name="name" placeholder="Name"
-                            :class="{'is-invalid':form.errors.has('name')}"
-                        >
-                        <has-error :form="form" field="name" />
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control"
-                            v-model="form.email" name="email" placeholder="Email Address"
-                            :class="{'is-invalid':form.errors.has('email')}"
-                        >
-                        <has-error :form="form" field="email" />
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control"
-                            v-model="form.bio" name="bio" id="bio" placeholder="Short bio for User (optional)"
-                            :class="{'is-invalid':form.errors.has('bio')}"
-                        ></textarea>
-                        <has-error :form="form" field="bio" />
-                    </div>
-                    <div class="form-group">
-                        <select name="type" id="type"
-                            v-model="form.type" class="form-control" 
-                            :class="{'is-invalid': form.errors.has('type')}">
-                            <option value="">   Select User Role</option>    
-                            <option value="admin">Admin</option>    
-                            <option value="user">Standard User</option>    
-                            <option value="author">Author</option>    
-                        </select>
-                        <has-error :form="form" field="type" />
-                    </div>
-                       <div class="form-group">
-                        <input type="password" class="form-control"
-                            v-model="form.password" name="password" id="password"
-                            :class="{'is-invalid':form.errors.has('password')}"
-                        >
-                        <has-error :form="form" field="password" />
-                    </div>
+                    <form @submit.prevent="createUser">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                v-model="form.name" name="name" placeholder="Name"
+                                :class="{'is-invalid':form.errors.has('name')}"
+                            >
+                            <has-error :form="form" field="name" />
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control"
+                                v-model="form.email" name="email" placeholder="Email Address"
+                                :class="{'is-invalid':form.errors.has('email')}"
+                            >
+                            <has-error :form="form" field="email" />
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control"
+                                v-model="form.bio" name="bio" id="bio" placeholder="Short bio for User (optional)"
+                                :class="{'is-invalid':form.errors.has('bio')}"
+                            ></textarea>
+                            <has-error :form="form" field="bio" />
+                        </div>
+                        <div class="form-group">
+                            <select name="type" id="type"
+                                v-model="form.type" class="form-control" 
+                                :class="{'is-invalid': form.errors.has('type')}">
+                                <option value="">   Select User Role</option>    
+                                <option value="admin">Admin</option>    
+                                <option value="user">Standard User</option>    
+                                <option value="author">Author</option>    
+                            </select>
+                            <has-error :form="form" field="type" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control"
+                                v-model="form.password" name="password" id="password"
+                                :class="{'is-invalid':form.errors.has('password')}"
+                            >
+                            <has-error :form="form" field="password" />
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -126,6 +128,11 @@
         },
         mounted() {
             console.log('Component mounted.USERS' )
+        },
+        methods: {
+            createUser(){
+                this.form.post('api/user')
+            }
         }
     }
 </script>
