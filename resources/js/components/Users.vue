@@ -58,8 +58,8 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form @submit.prevent="createUser">
+                <form @submit.prevent="createUser">
+                    <div class="modal-body">
                         <div class="form-group">
                             <input type="text" class="form-control"
                                 v-model="form.name" name="name" placeholder="Name"
@@ -99,12 +99,13 @@
                             >
                             <has-error :form="form" field="password" />
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -123,7 +124,6 @@
                     bio: '',
                     photo: '',
                 }),
-
             }
         },
         mounted() {
@@ -131,6 +131,7 @@
         },
         methods: {
             createUser(){
+                console.log('creating user')
                 this.form.post('api/user')
             }
         }
