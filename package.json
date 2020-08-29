@@ -27,6 +27,7 @@
         "@fortawesome/fontawesome-free": "^5.14.0",
         "adminlte": "^2.4.1",
         "bootstrap": "^4.5.2",
-        "vue": "^2.6.12"
+        "vue": "^2.6.12",
+        "vue-router": "^3.4.3"
     }
 }
