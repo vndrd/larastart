@@ -85,7 +85,7 @@ class UserController extends Controller
     {
         
         $user = User::findOrFail($id);
-        $this->validate([
+        $this->validate($request,[
             'name'=> 'required|string|max:191|',
             'email'=>'required|string|email|max:191|unique:users,email,'.$user->id,
             'password'=>'sometimes|min:6',
