@@ -10,7 +10,6 @@
                                 data-toggle="modal" data-target="#addUser">Add New
                                 <i class="fas fa-user-plus fa-fw"></i>
                             </button>
-                            
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -131,15 +130,28 @@
         },
         mounted() {
             this.loadUsers()
+            Fire.$on('AfterCreate', () => {
+                this.loadUsers()
+            })
         },
         methods: {
             createUser(){
+                this.$Progress.start()
                 this.form.post('api/user')
+                this.$Progress.finish()
+                $('#addUser').modal('hide')
+                $('.modal-backdrop').remove();
+                Fire.$emit('AfterCreate')
+                toast.fire({
+                    icon: 'success',
+                    type: 'success',
+                    title: 'User Created in succesfully'
+                })
             },
-            loadUsers(){
+            loadUsers(){                
                 axios.get("api/user").then( ({data}) => {
                     this.users = data.data
-                })
+                })                
             }
         }
     }
