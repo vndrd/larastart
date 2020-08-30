@@ -36,7 +36,7 @@
                                         <a href="#">
                                             <i class="fa fa-edit blue"></i>
                                         </a> / 
-                                        <a href="#">
+                                        <a href="#" @click="deleteUser(user.id)">
                                             <i class="fa fa-trash red"></i>
                                         </a>
                                     </td>
@@ -137,16 +137,48 @@
         methods: {
             createUser(){
                 this.$Progress.start()
-                this.form.post('api/user')
-                this.$Progress.finish()
-                $('#addUser').modal('hide')
-                $('.modal-backdrop').remove();
-                Fire.$emit('AfterCreate')
-                toast.fire({
-                    icon: 'success',
-                    type: 'success',
-                    title: 'User Created in succesfully'
+                this.form
+                    .post('api/user')
+                    .then(()=> {
+                        Fire.$emit('AfterCreate')
+                        $('#addUser').modal('hide')
+                        $('.modal-backdrop').remove();
+                        toast.fire({
+                            icon: 'success',
+                            type: 'success',
+                            title: 'User Created in succesfully'
+                        })
+                        this.$Progress.finish()
+                    })
+            },
+            deleteUser(id){
+                swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                    if (result.value) {
+                        this.form
+                            .delete('api/user/'+id)    
+                            .then(() => {
+                                Fire.$emit('AfterCreate')
+                                swal.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success'
+                                )
+                            })
+                            .catch( () => {
+                                swal.fire('Failed!','There was something wrong','warning')
+                            })
+                    }
                 })
+                
+                
             },
             loadUsers(){                
                 axios.get("api/user").then( ({data}) => {
