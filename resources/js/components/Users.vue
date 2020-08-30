@@ -59,7 +59,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form @submit.prevent="editMode? editUser: createUser">
+                <form @submit.prevent="editMode? editUser(): createUser()">
+                
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="text" class="form-control"
@@ -104,7 +105,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary" v-if="editMode">Update</button>
+                        <button type="submit" class="btn btn-success" v-else>Create</button>
                     </div>
                 </form>
                 </div>
@@ -120,6 +122,7 @@
                 editMode: false,
                 users: [],
                 form: new Form({
+                    id: '',
                     name: '',
                     email: '',
                     password: '',
@@ -144,15 +147,32 @@
             },
             editModal(user){
                 this.form.reset()
+                this.form.fill(user)
                 this.editMode = true
                 $('#addUser').modal('show')
-                this.form.fill(user)
             },
             /*actions*/
             editUser(){
-                alert("editando usuario")
+                console.log("editando usuario")
+                this.$Progress.start();
+                this.form.put('api/user/'+this.form.id)
+                    .then(()=>{
+                        Fire.$emit('AfterCreate')
+                        $('#addUser').modal('hide')
+                        $('.modal-backdrop').remove();
+                            swal.fire(
+                                'Updated!',
+                                'Information has been updated',
+                                'success'
+                            )
+                        this.$Progress.finish();
+                    })
+                    .catch(()=>{
+                        this.$Progress.fail();
+                    })
             },
             createUser(){
+                console.log("creating usuario")
                 this.$Progress.start()
                 this.form
                     .post('api/user')
@@ -166,6 +186,9 @@
                             title: 'User Created in succesfully'
                         })
                         this.$Progress.finish()
+                    })
+                    .catch(()=> {
+                        this.$Progress.fail();
                     })
             },
             deleteUser(id){
@@ -205,3 +228,5 @@
         }
     }
 </script>
+
+  
