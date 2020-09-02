@@ -14,11 +14,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth:api');
+    }
     public function index()
     {
         return User::latest()->paginate(10);
     }
-
+    public function profile(){
+        return auth('api')->user();
+    }
     /**
      * Show the form for creating a new resource.
      *
