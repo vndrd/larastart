@@ -266,14 +266,14 @@
                             <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                             <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                            <input type="email" class="form-control" id="inputName" placeholder="Name" v-model="form.name">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                             <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" v-model="form.email">
                             </div>
                         </div>
                         <div class="form-group">
@@ -353,7 +353,7 @@
         
             axios.get('api/profile').then(({data})=> {
                 this.form.fill(data)
-                console.log({form: this.form})
+                // console.log({form: this.form})
             })  
             
         }
