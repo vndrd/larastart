@@ -38,6 +38,11 @@ class UserController extends Controller
                 strpos($request->photo,';')))[1])[1];
             \Image::make($request->photo)->save(public_path('images/profile/').$name);
             $request->merge(['photo' => $name]);
+            /*Eliminar foto anterior*/
+            $oldPhoto = public_path('images/profile/') . $currentPhoto;
+            if( file_exists($oldPhoto)){
+                @unlink($oldPhoto);
+            }
         }
         if(!empty($request->password)){
             $request->merge([
