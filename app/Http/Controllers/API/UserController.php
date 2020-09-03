@@ -24,6 +24,23 @@ class UserController extends Controller
     public function profile(){
         return auth('api')->user();
     }
+    public function updateProfile(Request $request){
+        $user = auth('api')->user();
+        $this->validate($request,[
+            'name'=> 'required|string|max:191',
+            'email'=> 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'password'=> 'sometimes|required|min:6',
+        ]);
+        $currentPhoto = $user->photo;
+        if( $request->photo != $currentPhoto){
+            $name = time().'.'. explode('/', explode(':',substr($request->photo,0,
+                strpos($request->photo,';')))[1])[1];
+            \Image::make($request->photo)->save(public_path('images/profile/').$name);
+            $request->merge(['photo' => $name]);
+        }
+        $user->update($request->all());
+        return ['message'=> 'success'];
+    }
     /**
      * Show the form for creating a new resource.
      *

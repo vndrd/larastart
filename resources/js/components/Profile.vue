@@ -111,7 +111,7 @@
                                 <input class="form-control input-sm" placeholder="Response">
                             </div>
                             <div class="col-sm-3">
-                                <button type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
+                                <button @click.prevent="updateInfo" type="submit" class="btn btn-danger pull-right btn-block btn-sm">Send</button>
                             </div>
                             </div>
                         </form>
@@ -260,13 +260,13 @@
                     </div>
                     <!-- /.tab-pane -->
 
-                    <div class="tab-pane active" id="settings">
+                    <div class="tab-pane active col-md-12" id="settings">
                         <form class="form-horizontal">
                         <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                             <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputName" placeholder="Name" v-model="form.name">
+                            <input type="text" class="form-control" id="inputName" placeholder="Name" v-model="form.name">
                             </div>
                         </div>
                         <div class="form-group">
@@ -298,17 +298,21 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                </label>
+                            <label for="inputSkills" class="col-sm-2 control-label">Profile image</label>
+                            <div class="col-sm-10">
+                            <input type="file" class="form-control" @change="updateProfile">
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Name</label>
+
+                            <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputName" placeholder="Password" v-model="form.password">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-danger">Submit</button>
+                            <button @click.prevent="updateInfo" type="submit" class="btn btn-danger">Submit</button>
                             </div>
                         </div>
                         </form>
@@ -356,6 +360,30 @@
                 // console.log({form: this.form})
             })  
             
+        },
+        methods:{
+            updateInfo(){
+                this.$Progress.start()
+                this.form.put('api/profile')
+                    .then(()=> {
+                        this.$Progress.finish()
+                    })
+                    .catch(()=> {
+                        this.$Progress.fail()
+                    })
+            },
+            updateProfile(e){
+                let file = e.target.files[0]
+                if (file['size'] < 2111775){
+                    let reader = new FileReader()
+                    reader.onloadend = (file) => {
+                        this.form.photo = reader.result
+                    }
+                    reader.readAsDataURL(file)
+                }
+                swal.Fire({type: 'error', title: 'Oops...',text: 'You are uploading a large file'})
+                
+            }
         }
     }
 </script>

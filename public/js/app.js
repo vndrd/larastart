@@ -2361,6 +2361,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2388,6 +2392,35 @@ __webpack_require__.r(__webpack_exports__);
       _this.form.fill(data); // console.log({form: this.form})
 
     });
+  },
+  methods: {
+    updateInfo: function updateInfo() {
+      console.log('updating info methd');
+      this.form.put('api/profile').then(function () {
+        console.log('yes');
+      })["catch"](function () {});
+    },
+    updateProfile: function updateProfile(e) {
+      var _this2 = this;
+
+      var file = e.target.files[0];
+
+      if (file['size'] < 2111775) {
+        var reader = new FileReader();
+
+        reader.onloadend = function (file) {
+          _this2.form.photo = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      }
+
+      swal.Fire({
+        type: 'error',
+        title: 'Oops...',
+        text: 'You are uploading a large file'
+      });
+    }
   }
 });
 
@@ -65384,13 +65417,54 @@ var render = function() {
           _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "tab-content" }, [
-            _vm._m(2),
+            _c("div", { staticClass: "tab-pane", attrs: { id: "activity" } }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "post clearfix" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "\n                        Lorem ipsum represents a long-held tradition for designers,\n                        typographers and the like. Some people hate it and argue for\n                        its demise, but others ignore the hate as they create awesome\n                        tools to help create filler text for everyone from bacon lovers\n                        to Charlie Sheen fans.\n                    "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("form", { staticClass: "form-horizontal" }, [
+                  _c("div", { staticClass: "form-group margin-bottom-none" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-3" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-danger pull-right btn-block btn-sm",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.updateInfo($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Send")]
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(5)
+            ]),
             _vm._v(" "),
-            _vm._m(3),
+            _vm._m(6),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "tab-pane active", attrs: { id: "settings" } },
+              {
+                staticClass: "tab-pane active col-md-12",
+                attrs: { id: "settings" }
+              },
               [
                 _c("form", { staticClass: "form-horizontal" }, [
                   _c("div", { staticClass: "form-group" }, [
@@ -65415,7 +65489,7 @@ var render = function() {
                         ],
                         staticClass: "form-control",
                         attrs: {
-                          type: "email",
+                          type: "text",
                           id: "inputName",
                           placeholder: "Name"
                         },
@@ -65471,15 +65545,88 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _vm._m(5),
-                  _vm._v(" "),
-                  _vm._m(6),
-                  _vm._v(" "),
                   _vm._m(7),
                   _vm._v(" "),
-                  _vm._m(8)
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-2 control-label",
+                        attrs: { for: "inputSkills" }
+                      },
+                      [_vm._v("Profile image")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "file" },
+                        on: { change: _vm.updateProfile }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-sm-2 control-label",
+                        attrs: { for: "inputName" }
+                      },
+                      [_vm._v("Name")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.password,
+                            expression: "form.password"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "password",
+                          id: "inputName",
+                          placeholder: "Password"
+                        },
+                        domProps: { value: _vm.form.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "password", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("div", { staticClass: "col-sm-offset-2 col-sm-10" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: { type: "submit" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.updateInfo($event)
+                            }
+                          }
+                        },
+                        [_vm._v("Submit")]
+                      )
+                    ])
+                  ])
                 ])
               ]
             )
@@ -65597,186 +65744,149 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tab-pane", attrs: { id: "activity" } }, [
-      _c("div", { staticClass: "post" }, [
-        _c("div", { staticClass: "user-block" }, [
-          _c("span", { staticClass: "username" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Jonathan Burke Jr.")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "pull-right btn-box-tool", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fa fa-times" })]
-            )
-          ]),
+    return _c("div", { staticClass: "post" }, [
+      _c("div", { staticClass: "user-block" }, [
+        _c("span", { staticClass: "username" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Jonathan Burke Jr.")]),
           _vm._v(" "),
-          _c("span", { staticClass: "description" }, [
-            _vm._v("Shared publicly - 7:30 PM today")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n                        Lorem ipsum represents a long-held tradition for designers,\n                        typographers and the like. Some people hate it and argue for\n                        its demise, but others ignore the hate as they create awesome\n                        tools to help create filler text for everyone from bacon lovers\n                        to Charlie Sheen fans.\n                    "
+          _c(
+            "a",
+            { staticClass: "pull-right btn-box-tool", attrs: { href: "#" } },
+            [_c("i", { staticClass: "fa fa-times" })]
           )
         ]),
         _vm._v(" "),
-        _c("ul", { staticClass: "list-inline" }, [
-          _c("li", [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fa fa-share margin-r-5" }),
-                _vm._v(" Share")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fa fa-thumbs-o-up margin-r-5" }),
-                _vm._v(" Like")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "pull-right" }, [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fa fa-comments-o margin-r-5" }),
-                _vm._v(" Comments\n                            (5)")
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control input-sm",
-          attrs: { type: "text", placeholder: "Type a comment" }
-        })
+        _c("span", { staticClass: "description" }, [
+          _vm._v("Shared publicly - 7:30 PM today")
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "post clearfix" }, [
-        _c("div", { staticClass: "user-block" }, [
-          _c("span", { staticClass: "username" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Sarah Ross")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "pull-right btn-box-tool", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fa fa-times" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "description" }, [
-            _vm._v("Sent you a message - 3 days ago")
+      _c("p", [
+        _vm._v(
+          "\n                        Lorem ipsum represents a long-held tradition for designers,\n                        typographers and the like. Some people hate it and argue for\n                        its demise, but others ignore the hate as they create awesome\n                        tools to help create filler text for everyone from bacon lovers\n                        to Charlie Sheen fans.\n                    "
+        )
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "list-inline" }, [
+        _c("li", [
+          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-share margin-r-5" }),
+            _vm._v(" Share")
           ])
         ]),
         _vm._v(" "),
-        _c("p", [
-          _vm._v(
-            "\n                        Lorem ipsum represents a long-held tradition for designers,\n                        typographers and the like. Some people hate it and argue for\n                        its demise, but others ignore the hate as they create awesome\n                        tools to help create filler text for everyone from bacon lovers\n                        to Charlie Sheen fans.\n                    "
-          )
+        _c("li", [
+          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-thumbs-o-up margin-r-5" }),
+            _vm._v(" Like")
+          ])
         ]),
         _vm._v(" "),
-        _c("form", { staticClass: "form-horizontal" }, [
-          _c("div", { staticClass: "form-group margin-bottom-none" }, [
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("input", {
-                staticClass: "form-control input-sm",
-                attrs: { placeholder: "Response" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-3" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger pull-right btn-block btn-sm",
-                  attrs: { type: "submit" }
-                },
-                [_vm._v("Send")]
-              )
-            ])
+        _c("li", { staticClass: "pull-right" }, [
+          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-comments-o margin-r-5" }),
+            _vm._v(" Comments\n                            (5)")
           ])
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "post" }, [
-        _c("div", { staticClass: "user-block" }, [
-          _c("span", { staticClass: "username" }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Adam Jones")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              { staticClass: "pull-right btn-box-tool", attrs: { href: "#" } },
-              [_c("i", { staticClass: "fa fa-times" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "description" }, [
-            _vm._v("Posted 5 photos - 5 days ago")
-          ])
-        ]),
+      _c("input", {
+        staticClass: "form-control input-sm",
+        attrs: { type: "text", placeholder: "Type a comment" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "user-block" }, [
+      _c("span", { staticClass: "username" }, [
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Sarah Ross")]),
         _vm._v(" "),
-        _c("div", { staticClass: "row margin-bottom" }, [
-          _c("div", { staticClass: "col-sm-6" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-sm-6" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6" })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("ul", { staticClass: "list-inline" }, [
-          _c("li", [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fa fa-share margin-r-5" }),
-                _vm._v(" Share")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fa fa-thumbs-o-up margin-r-5" }),
-                _vm._v(" Like")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "pull-right" }, [
-            _c(
-              "a",
-              { staticClass: "link-black text-sm", attrs: { href: "#" } },
-              [
-                _c("i", { staticClass: "fa fa-comments-o margin-r-5" }),
-                _vm._v(" Comments\n                            (5)")
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control input-sm",
-          attrs: { type: "text", placeholder: "Type a comment" }
-        })
+        _c(
+          "a",
+          { staticClass: "pull-right btn-box-tool", attrs: { href: "#" } },
+          [_c("i", { staticClass: "fa fa-times" })]
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "description" }, [
+        _vm._v("Sent you a message - 3 days ago")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-9" }, [
+      _c("input", {
+        staticClass: "form-control input-sm",
+        attrs: { placeholder: "Response" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post" }, [
+      _c("div", { staticClass: "user-block" }, [
+        _c("span", { staticClass: "username" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Adam Jones")]),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "pull-right btn-box-tool", attrs: { href: "#" } },
+            [_c("i", { staticClass: "fa fa-times" })]
+          )
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "description" }, [
+          _vm._v("Posted 5 photos - 5 days ago")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row margin-bottom" }, [
+        _c("div", { staticClass: "col-sm-6" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-sm-6" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-6" })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "list-inline" }, [
+        _c("li", [
+          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-share margin-r-5" }),
+            _vm._v(" Share")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-thumbs-o-up margin-r-5" }),
+            _vm._v(" Like")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "pull-right" }, [
+          _c("a", { staticClass: "link-black text-sm", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-comments-o margin-r-5" }),
+            _vm._v(" Comments\n                            (5)")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control input-sm",
+        attrs: { type: "text", placeholder: "Type a comment" }
+      })
     ])
   },
   function() {
@@ -65979,36 +66089,6 @@ var staticRenderFns = [
           staticClass: "form-control",
           attrs: { type: "text", id: "inputSkills", placeholder: "Skills" }
         })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-sm-offset-2 col-sm-10" }, [
-        _c("div", { staticClass: "checkbox" }, [
-          _c("label", [
-            _c("input", { attrs: { type: "checkbox" } }),
-            _vm._v(" I agree to the "),
-            _c("a", { attrs: { href: "#" } }, [_vm._v("terms and conditions")])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "col-sm-offset-2 col-sm-10" }, [
-        _c(
-          "button",
-          { staticClass: "btn btn-danger", attrs: { type: "submit" } },
-          [_vm._v("Submit")]
-        )
       ])
     ])
   }
