@@ -264,37 +264,29 @@
                         <form class="form-horizontal">
                         <div class="form-group">
                             <label for="inputName" class="col-sm-2 control-label">Name</label>
-
                             <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName" placeholder="Name" v-model="form.name">
+                                <input type="text" class="form-control" id="inputName" placeholder="Name" 
+                                    v-model="form.name"
+                                    :class="{'is-invalid':form.errors.has('name')}"
+                                >
+                                <has-error :form="form" field="name" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
                             <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Email" v-model="form.email">
+                                <input type="email" class="form-control" id="inputEmail" placeholder="Email" 
+                                    v-model="form.email"
+                                    :class="{'is-invalid':form.errors.has('email')}"
+                                >
+                                <has-error :form="form" field="email" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
+                            <label for="inputExperience" class="col-sm-2 control-label">Biography</label>
 
                             <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName" placeholder="Name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                            <div class="col-sm-10">
-                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                            <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                            <textarea class="form-control" id="inputExperience" placeholder="Biography" v-model="form.bio"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -304,10 +296,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputName" class="col-sm-2 control-label">Name</label>
-
+                            <label for="inputPassword" class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputName" placeholder="Password" v-model="form.password">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password" 
+                                v-model="form.password"
+                                :class="{'is-invalid':form.errors.has('password')}"
+                            >
+                            <has-error :form="form" field="password" />
                             </div>
                         </div>
                         <div class="form-group">

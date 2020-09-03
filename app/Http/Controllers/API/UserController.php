@@ -32,11 +32,17 @@ class UserController extends Controller
             'password'=> 'sometimes|required|min:6',
         ]);
         $currentPhoto = $user->photo;
+        /*Almacenar foto en la carpeta images/profile */
         if( $request->photo != $currentPhoto){
             $name = time().'.'. explode('/', explode(':',substr($request->photo,0,
                 strpos($request->photo,';')))[1])[1];
             \Image::make($request->photo)->save(public_path('images/profile/').$name);
             $request->merge(['photo' => $name]);
+        }
+        if(!empty($request->password)){
+            $request->merge([
+                'password' => Hash::make($request->password)
+            ]);
         }
         $user->update($request->all());
         return ['message'=> 'success'];
