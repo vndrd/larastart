@@ -11,7 +11,7 @@
                     <h5 class="widget-user-desc">Web Designer</h5>
                     </div>
                     <div class="widget-user-image">
-                    <img class="img-circle" src="" alt="User Avatar">
+                    <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
                     <!-- ../dist/img/user3-128x128.jpg -->
                     </div>
                     <div class="box-footer">
@@ -376,8 +376,10 @@
                     }
                     reader.readAsDataURL(file)
                 }
-                swal.Fire({type: 'error', title: 'Oops...',text: 'You are uploading a large file'})
-                
+                swal.Fire({type: 'error', title: 'Oops...',text: 'You are uploading a large file'})                
+            },
+            getProfilePhoto(){
+                return 'images/profile/'+this.form.photo;
             }
         }
     }
