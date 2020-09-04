@@ -2612,6 +2612,12 @@ __webpack_require__.r(__webpack_exports__);
     Fire.$on('AfterCreate', function () {
       _this.loadUsers();
     });
+    Fire.$on('searching', function () {
+      var query = _this.$parent.search;
+      axios.get('api/findUser?q=' + query).then(function (data) {
+        _this.users = data.data;
+      })["catch"](function () {});
+    });
   },
   methods: {
     /* pagination */
@@ -2619,7 +2625,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('api/user?page=' + page).then(function (response) {
+      var query = this.$parent.search;
+      axios.get('api/findUser?q=' + query + '&' + 'page=' + page).then(function (response) {
         _this2.users = response.data;
       });
     },
@@ -84383,7 +84390,15 @@ Vue.component('not-found', __webpack_require__(/*! ./components/NotFound.vue */ 
 
 var app = new Vue({
   el: '#app',
-  router: router
+  router: router,
+  data: {
+    search: ''
+  },
+  methods: {
+    searchit: function searchit() {
+      Fire.$emit('searching');
+    }
+  }
 });
 
 /***/ }),
