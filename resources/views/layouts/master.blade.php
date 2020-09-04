@@ -166,7 +166,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-    
+    @auth
+      <script>
+        window.user = @json(auth()->user())
+      </script>
+    @endauth
     {{-- <script src="{{ URL::asset('adminlte.js') }}"> --}}
     <!-- jQuery -->
     <script src="http://127.0.0.1:8000/adminlte/plugins/jquery/jquery.min.js"></script>

@@ -380,7 +380,7 @@
                 swal.Fire({type: 'error', title: 'Oops...',text: 'You are uploading a large file'})                
             },
             getProfilePhoto(){
-                let photo = (this.form.photo.length > 200) ? this.form.photo : 'images/profile/' + this.form.photo
+                let photo = (this.form.photo.length > 200) ? this.form.photo : 'images/profile/' + this.form.photo  
                 return photo;
             }
         }

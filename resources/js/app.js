@@ -11,6 +11,9 @@ window.Fire = new Vue()
 
 import moment from 'moment'
 
+import Gate from './Gate'
+    Vue.prototype.$gate = new Gate(window.user)
+
 import VueProgressBar from 'vue-progressbar'
     Vue.use(VueProgressBar, {
         color: 'rgba(143,255,199)',
@@ -84,6 +87,10 @@ Vue.component(
 Vue.component(
     'passport-personal-access-tokens',
     require('./components/passport/PersonalAccessTokens.vue').default
+);
+Vue.component(
+    'not-found',
+    require('./components/NotFound.vue').default
 );
 /**
  * Next, we will create a fresh Vue application instance and attach it to
