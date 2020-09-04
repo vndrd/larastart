@@ -172,7 +172,6 @@
                     })
             },
             createUser(){
-                console.log("creating usuario")
                 this.$Progress.start()
                 this.form
                     .post('api/user')

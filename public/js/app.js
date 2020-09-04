@@ -2394,6 +2394,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$Progress.start();
       this.form.put('api/profile').then(function () {
+        Fire.$emit('AfterCreate');
+
         _this2.$Progress.finish();
       })["catch"](function () {
         _this2.$Progress.fail();
@@ -2421,7 +2423,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getProfilePhoto: function getProfilePhoto() {
-      return 'images/profile/' + this.form.photo;
+      var photo = this.form.photo.length > 200 ? this.form.photo : 'images/profile/' + this.form.photo;
+      return photo;
     }
   }
 });
@@ -2611,7 +2614,6 @@ __webpack_require__.r(__webpack_exports__);
     createUser: function createUser() {
       var _this3 = this;
 
-      console.log("creating usuario");
       this.$Progress.start();
       this.form.post('api/user').then(function () {
         Fire.$emit('AfterCreate');

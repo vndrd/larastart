@@ -361,6 +361,7 @@
                 this.$Progress.start()
                 this.form.put('api/profile')
                     .then(()=> {
+                        Fire.$emit('AfterCreate')
                         this.$Progress.finish()
                     })
                     .catch(()=> {
@@ -379,7 +380,8 @@
                 swal.Fire({type: 'error', title: 'Oops...',text: 'You are uploading a large file'})                
             },
             getProfilePhoto(){
-                return 'images/profile/'+this.form.photo;
+                let photo = (this.form.photo.length > 200) ? this.form.photo : 'images/profile/' + this.form.photo
+                return photo;
             }
         }
     }
