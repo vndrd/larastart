@@ -112,4 +112,5 @@ const app = new Vue({
             Fire.$emit('searching')
         }
     }
+    
 });

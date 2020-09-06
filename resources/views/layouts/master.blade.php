@@ -17,7 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {{-- <link rel="stylesheet" href="{{ asset('AdminLTE.css') }}"> --}}
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="http://127.0.0.1:8000/adminlte/dist/css/adminlte.min.css">
+    {{-- <link rel="stylesheet" href="http://127.0.0.1:8000/adminlte/dist/css/adminlte.min.css"> --}}
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -174,13 +174,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @endauth
     {{-- <script src="{{ URL::asset('adminlte.js') }}"> --}}
     <!-- jQuery -->
-    <script src="http://127.0.0.1:8000/adminlte/plugins/jquery/jquery.min.js"></script>
+    {{-- <script src="http://127.0.0.1:8000/adminlte/plugins/jquery/jquery.min.js"></script> --}}
     <!-- Bootstrap 4 -->
-    <script src="http://127.0.0.1:8000/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="http://127.0.0.1:8000/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
     <!-- AdminLTE App -->
-    <script src="http://127.0.0.1:8000/adminlte/dist/js/adminlte.min.js"></script>
+    {{-- <script src="http://127.0.0.1:8000/adminlte/dist/js/adminlte.min.js"></script> --}}
     <!-- AdminLTE for demo purposes -->
-    <script src="http://127.0.0.1:8000/adminlte/dist/js/demo.js"></script>
+    {{-- <script src="http://127.0.0.1:8000/adminlte/dist/js/demo.js"></script> --}}
 
     <script src="/js/app.js"></script>
 </body>
